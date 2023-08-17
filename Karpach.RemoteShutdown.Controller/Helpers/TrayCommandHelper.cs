@@ -27,6 +27,7 @@ namespace Karpach.RemoteShutdown.Controller.Helpers
             new TrayCommand {CommandType = TrayCommandType.Hibernate, Name = "Hibernate"},
             new TrayCommand {CommandType = TrayCommandType.Restart, Name = "Restart"},
             new TrayCommand {CommandType = TrayCommandType.TurnScreenOff, Name = "Turn screen off"},
+	    new TrayCommand {CommandType = TrayCommandType.TurnScreenOn, Name = "Turn screen on"},
             new TrayCommand {CommandType = TrayCommandType.Suspend, Name = "Suspend"},
             new TrayCommand {CommandType = TrayCommandType.Shutdown, Name = "Shutdown"},
             new TrayCommand {CommandType = TrayCommandType.ForceShutdown, Name = "Force Shutdown"},
@@ -65,6 +66,14 @@ namespace Karpach.RemoteShutdown.Controller.Helpers
                         0x0112,         // WM_SYSCOMMAND
                         (IntPtr)0xf170, // SC_MONITORPOWER
                         (IntPtr)0x0002  // POWER_OFF
+                    );
+                    break;
+		case TrayCommandType.TurnScreenOn:
+                    SendMessage(
+                        (IntPtr)0xffff, // HWND_BROADCAST
+                        0x0112,         // WM_SYSCOMMAND
+                        (IntPtr)0xf170, // SC_MONITORPOWER
+                        (IntPtr)-1  // POWER_ON -1
                     );
                     break;
                 case TrayCommandType.ForceShutdown:

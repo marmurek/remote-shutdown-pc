@@ -48,7 +48,7 @@ namespace Karpach.RemoteShutdown.Controller.Helpers
         }
 
         public void RunCommand(TrayCommandType commandType)
-        {            
+        {
             switch (commandType)
             {
                 case TrayCommandType.Hibernate:
@@ -87,12 +87,12 @@ namespace Karpach.RemoteShutdown.Controller.Helpers
                         (IntPtr)0x0002  // POWER_OFF
                     );
                     break;
-		case TrayCommandType.TurnScreenOn:
+		        case TrayCommandType.TurnScreenOn:
                     SendMessage(
                         (IntPtr)0xffff, // HWND_BROADCAST
                         0x0112,         // WM_SYSCOMMAND
                         (IntPtr)0xf170, // SC_MONITORPOWER
-                        (IntPtr)-1  // POWER_ON -1
+                        (IntPtr)(-1)  // POWER_ON -1
                     );
                     break;
                 case TrayCommandType.ForceShutdown:
